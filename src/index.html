@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kapp</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body>
+    <h1>Kapp</h1>
+    <p>List all your assets, documents and more</p>
+    <img src="../assets/images/image.svg" alt="home" /><br />
+    <button id="start">Start</button>
+
+    <!-- dynamicly populated -->
+    <div class="assets"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
