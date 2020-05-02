@@ -22,10 +22,22 @@ power.addEventListener("click", () => {
 
 menu.forEach((item) => {
   item.addEventListener("click", () => {
-    document.querySelector(".active img").src = "../assets/images/menu.png";
+    if (item.className === "active") return false;
+    let image = item.querySelector("img").src;
+    let no_active = document.querySelector(".active img").src;
+
+    //remove active
+    document.querySelector(".active img").src = no_active.replace(
+      "_a.png",
+      ".png"
+    );
     document.querySelector(".active").classList.remove("active");
+
+    //add active
+    document.querySelector("#selected-route").textContent = item.textContent;
+    document.querySelector("#selected-title").textContent = item.textContent;
     item.classList.add("active");
-    item.querySelector("img").src = "../assets/images/active.png";
+    item.querySelector("img").src = image.replace(".png", "_a.png");
   });
 });
 

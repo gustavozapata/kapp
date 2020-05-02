@@ -13,6 +13,7 @@
   </head>
   <body>
     <div id="page">
+      <!-- aside -->
       <aside>
         <div class="dragable"></div>
         <div class="profile">
@@ -20,29 +21,34 @@
         </div>
         <img src="../assets/images/power.png" alt="power icon" id="power" />
       </aside>
+
+      <!-- nav -->
       <nav>
         <div class="dragable"></div>
         <h1>Kapp</h1>
         <h3>Categories</h3>
         <ul>
           <li class="active">
-            <img src="../assets/images/active.png" alt="active icon" /> Assets
+            <img src="../assets/images/assets_a.png" alt="assets icon" /> Assets
           </li>
           <li>
-            <img src="../assets/images/menu.png" alt="menu icon" /> Documents
+            <img src="../assets/images/docs.png" alt="docs icon" /> Documents
           </li>
           <li>
-            <img src="../assets/images/menu.png" alt="menu icon" /> Bank Cards
+            <img src="../assets/images/cards.png" alt="cards icon" /> Bank Cards
           </li>
-          <li><img src="../assets/images/menu.png" alt="menu icon" /> Apps</li>
+          <li><img src="../assets/images/apps.png" alt="apps icon" /> Apps</li>
         </ul>
       </nav>
+
+      <!-- main -->
       <main>
         <div class="dragable"></div>
         <header>
-          <p>Categories: Assets</p>
+          <p>Categories / <span id="selected-route">Assets</span></p>
         </header>
         <div class="main">
+          <h2>My <span id="selected-title">Assets</span></h2>
           <!-- dynamicly populated -->
           <div class="items"></div>
           <button id="start">Start</button>
