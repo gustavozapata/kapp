@@ -1,8 +1,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;800&display=swap");
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: "Montserrat", sans-serif;
 }
-img {
-  width: 100px;
+.dragable {
+  width: 100%;
+  height: 20px;
+  -webkit-app-region: drag;
+}
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+#page {
+  display: flex;
+  height: 100vh;
+}
+aside {
+  position: relative;
+  flex-basis: 60px;
+  background-color: #202d8b;
+  text-align: center;
+}
+.profile {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  border-radius: 50%;
+  margin: 20px auto;
+  background: linear-gradient(#fba141, #ffda2e);
+}
+.profile p {
+  font-weight: 600;
+  color: white;
+  vertical-align: middle;
+  margin-top: 20px;
+  font-size: 1.5em;
+  line-height: 45px;
+}
+#power {
+  position: absolute;
+  bottom: 20px;
+  width: 25px;
+  left: 50%;
+  margin-left: -12.5px;
+  cursor: pointer;
+  z-index: 100;
+}
+nav {
+  flex-basis: 180px;
+  padding-left: 18px;
+  background: linear-gradient(#1b1f80, #253992);
+}
+nav h1 {
+  color: white;
+  font-weight: 600;
+}
+nav h3 {
+  color: #6269a0;
+  font-weight: 400;
+  font-size: 0.85em;
+  margin: 30px 0;
+}
+nav ul {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  color: #6269a0;
+  list-style: none;
+  margin: 15px 0;
+  font-size: 0.87em;
+  cursor: pointer;
+  vertical-align: middle;
+}
+ul img {
+  width: 14px;
+  margin-right: 10px;
+  margin-top: 15px;
+}
+ul .active {
+  color: white;
+}
+main {
+  flex-basis: 70%;
+  background: linear-gradient(#f3f6ff, #ffffff);
 }

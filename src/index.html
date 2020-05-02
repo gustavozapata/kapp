@@ -12,13 +12,43 @@
     <link rel="stylesheet" href="../assets/css/main.css" />
   </head>
   <body>
-    <h1>Kapp</h1>
-    <p>List all your assets, documents and more</p>
-    <img src="../assets/images/image.svg" alt="home" /><br />
-    <button id="start">Start</button>
-
-    <!-- dynamicly populated -->
-    <div class="assets"></div>
+    <div id="page">
+      <aside>
+        <div class="dragable"></div>
+        <div class="profile">
+          <p>GZ</p>
+        </div>
+        <img src="../assets/images/power.png" alt="power icon" id="power" />
+      </aside>
+      <nav>
+        <div class="dragable"></div>
+        <h1>Kapp</h1>
+        <h3>Categories</h3>
+        <ul>
+          <li class="active">
+            <img src="../assets/images/active.png" alt="active icon" /> Assets
+          </li>
+          <li>
+            <img src="../assets/images/menu.png" alt="menu icon" /> Documents
+          </li>
+          <li>
+            <img src="../assets/images/menu.png" alt="menu icon" /> Bank Cards
+          </li>
+          <li><img src="../assets/images/menu.png" alt="menu icon" /> Apps</li>
+        </ul>
+      </nav>
+      <main>
+        <div class="dragable"></div>
+        <header>
+          <p>Categories: Assets</p>
+        </header>
+        <div class="main">
+          <!-- dynamicly populated -->
+          <div class="items"></div>
+          <button id="start">Start</button>
+        </div>
+      </main>
+    </div>
 
     <script src="index.js"></script>
   </body>
