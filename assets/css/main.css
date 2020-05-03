@@ -99,10 +99,10 @@ ul .active {
   color: white;
 }
 main {
-  margin-left: 260px;
+  margin-left: 270px;
   width: 100%;
   flex-basis: 70%;
-  background: linear-gradient(#f3f6ff, #ffffff);
+  /* background: linear-gradient(#f3f6ff, #ffffff); */
 }
 main header {
   padding-left: 15px;
@@ -116,4 +116,57 @@ main header p {
 }
 .main h2 {
   color: #1400ad;
+}
+#spinner {
+  width: 500px;
+  text-align: center;
+  margin: 40px auto;
+}
+#spinner img {
+  width: 440px;
+}
+#add {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 25px;
+  font-weight: 500;
+  background-color: #1400ad;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  float: right;
+  cursor: pointer;
+}
+.item-container {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+.item-icon {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: rgb(239, 242, 253);
+}
+.item-info p,
+.item-info span {
+  margin: 1px 10px;
+}
+.item-info p {
+  font-size: 0.7em;
+}
+.item-info span {
+  font-size: 0.6em;
+  font-weight: 600;
+  color: rgb(50, 200, 100);
+  padding: 1px 3px;
+  border-radius: 7px;
+  border: 1px solid rgb(50, 200, 100);
+}
+.item-info .item-name {
+  font-size: 0.9em;
+  font-weight: 600;
 }
