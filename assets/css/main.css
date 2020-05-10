@@ -160,7 +160,7 @@ main header p {
 }
 .item-info span {
   font-size: 0.6em;
-  font-weight: 600;
+  font-weight: 500;
   color: rgb(50, 200, 100);
   padding: 1px 3px;
   border-radius: 7px;
@@ -169,4 +169,11 @@ main header p {
 .item-info .item-name {
   font-size: 0.9em;
   font-weight: 600;
+  display: inline-block;
+}
+.bin-image,
+.pen-image {
+  width: 11px;
+  margin: 0 4px;
+  cursor: pointer;
 }

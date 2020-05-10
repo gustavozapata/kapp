@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  padding: 0px;
+}
+.main-form {
+  padding: 10px 30px;
+  /* text-align: center; */
+}
+h3 {
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto 0px auto;
+  background: linear-gradient(#1b1f80, #253992);
+  color: white;
+  -webkit-app-region: drag;
+}
+.buttons {
+  margin: 20px auto 12px auto;
+  text-align: center;
+}
+.buttons button {
+  width: 80px;
+  height: 27px;
+  margin: 10px;
+  border: 1.5px solid #1b1f80;
+  border-radius: 15px;
+  background-color: transparent;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  color: #1b1f80;
+  outline: none;
+}
+.buttons button:hover {
+  background-color: #1b1f80;
+  color: white;
+}
+input,
+textarea {
+  /* border: none; */
+  border: 1px solid rgb(129, 129, 129);
+  padding: 8px 10px 5px;
+  border-radius: 5px;
+  margin: 9px 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  outline: none;
+  width: 150px;
+}
+.keywords {
+  /* clear: both; */
+  text-align: center;
+}
+.keywords button {
+  /* display: inline; */
+  vertical-align: bottom;
+  margin: 0 0 10px 5px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #1b1f80;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+}
+.keywords button:hover {
+  background-color: #1b1f80;
+  color: white;
+}
+.keywords input {
+  /* width: 350px; */
+  margin-top: 20px;
+}
+.keys {
+  text-align: center;
+}
+.keyword,
+.delete {
+  border: 1px solid #1b1f80;
+  color: #1b1f80;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  font-size: 0.7em;
+  font-weight: 600;
+  padding: 2px;
+  background-color: #cdd2fd;
+}
+.delete {
+  border-radius: 0;
+  background-color: white;
+  cursor: pointer;
+  border-left-color: transparent;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  margin-right: 4px;
+}
+textarea {
+  resize: none;
+  height: 65px;
+  line-height: 1.6;
+  float: right;
+}
+input {
+  vertical-align: top;
+}
+input:focus,
+textarea:focus {
+  border-color: #fba141;
+}
+label {
+  font-weight: 600;
+}

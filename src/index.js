@@ -1,12 +1,13 @@
 const axios = require("axios");
+const path = require("path");
 const electron = require("electron");
+const BrowserWindow = electron.remote.BrowserWindow;
 const remote = electron.remote;
 
 const power = document.querySelector("#power");
-
 const items = document.querySelector(".items");
-
 const menu = document.querySelectorAll("nav ul li");
+const addBtn = document.querySelector("#add");
 
 axios.get("http://localhost:4000/api/v1/assets").then((res) => {
   document.querySelector("#spinner").style.display = "none";
@@ -17,6 +18,26 @@ axios.get("http://localhost:4000/api/v1/assets").then((res) => {
 power.addEventListener("click", () => {
   let win = remote.getCurrentWindow();
   win.close();
+});
+
+// ADD ITEM
+addBtn.addEventListener("click", function () {
+  const modalPath = path.join("file://", __dirname, "add.html");
+  let win = new BrowserWindow({
+    width: 450,
+    height: 330,
+    // center: true,
+    frame: false,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+  win.on("close", function () {
+    win = null;
+  });
+  // win.webContents.openDevTools();
+  win.loadURL(modalPath);
+  win.show();
 });
 
 menu.forEach((item) => {
@@ -63,7 +84,9 @@ function populate(data) {
     element += `<div class="item-container"><div class="item-icon"><p>${el.name.substring(
       0,
       2
-    )}</p></div><div class="item-info"><p class="item-name">${el.name}</p><p>${
+    )}</p></div><div class="item-info"><p class="item-name">${
+      el.name
+    }</p><img class="pen-image" src="../assets/images/pen.svg"/><img class="bin-image" src="../assets/images/bin.png"/><p>${
       el.currentlyAt.city
     }</p><span>${el.keywords[0]}</span></div></div>`;
   });
