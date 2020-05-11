@@ -1,8 +1,9 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+let win = "";
 
 function createWindow() {
   // Create the browser window.
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     frame: false,
@@ -17,6 +18,10 @@ function createWindow() {
   // Open the DevTools.
   // win.webContents.openDevTools();
 }
+
+ipcMain.on("update-list", () => {
+  win.webContents.send("update-list");
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

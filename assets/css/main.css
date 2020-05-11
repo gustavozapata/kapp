@@ -99,13 +99,20 @@ ul .active {
   color: white;
 }
 main {
-  margin-left: 270px;
+  margin-left: 260px;
   width: 100%;
   flex-basis: 70%;
   /* background: linear-gradient(#f3f6ff, #ffffff); */
 }
 main header {
   padding-left: 15px;
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid rgb(170, 170, 170);
+}
+main header h2 {
+  color: #1400ad;
 }
 main header p {
   color: #9b9da9;
@@ -114,13 +121,10 @@ main header p {
 .main {
   padding-left: 15px;
 }
-.main h2 {
-  color: #1400ad;
-}
 #spinner {
   width: 500px;
   text-align: center;
-  margin: 40px auto;
+  margin: 210px auto;
 }
 #spinner img {
   width: 440px;
@@ -135,8 +139,12 @@ main header p {
   color: white;
   border-radius: 50%;
   text-align: center;
-  float: right;
+  position: fixed;
+  right: 10px;
   cursor: pointer;
+}
+.items {
+  margin-top: 150px;
 }
 .item-container {
   display: flex;

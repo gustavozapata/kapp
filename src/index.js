@@ -3,21 +3,31 @@ const path = require("path");
 const electron = require("electron");
 const BrowserWindow = electron.remote.BrowserWindow;
 const remote = electron.remote;
+const ipc = electron.ipcRenderer;
 
 const power = document.querySelector("#power");
 const items = document.querySelector(".items");
 const menu = document.querySelectorAll("nav ul li");
 const addBtn = document.querySelector("#add");
 
-axios.get("http://localhost:4000/api/v1/assets").then((res) => {
-  document.querySelector("#spinner").style.display = "none";
-  let data = res.data.data;
-  items.innerHTML = populate(data);
-});
+loadData();
+
+async function loadData() {
+  await axios.get("http://localhost:4000/api/v1/assets").then((res) => {
+    document.querySelector("#spinner").style.display = "none";
+    let data = res.data.data;
+    items.innerHTML = populate(data);
+  });
+}
 
 power.addEventListener("click", () => {
   let win = remote.getCurrentWindow();
   win.close();
+});
+
+ipc.on("update-list", function () {
+  document.querySelector("#spinner").style.display = "block";
+  loadData();
 });
 
 // ADD ITEM
