@@ -7,6 +7,8 @@ function createWindow() {
     width: 800,
     height: 600,
     frame: false,
+    resizable: false,
+    // modal: true,
     webPreferences: {
       nodeIntegration: true,
     },

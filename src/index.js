@@ -10,10 +10,10 @@ const items = document.querySelector(".items");
 const menu = document.querySelectorAll("nav ul li");
 const addBtn = document.querySelector("#add");
 
-loadData();
+loadData("assets");
 
-async function loadData() {
-  await axios.get("http://localhost:4000/api/v1/assets").then((res) => {
+async function loadData(endPoint) {
+  await axios.get(`http://localhost:4000/api/v1/${endPoint}`).then((res) => {
     document.querySelector("#spinner").style.display = "none";
     let data = res.data.data;
     items.innerHTML = populate(data);
@@ -27,7 +27,7 @@ power.addEventListener("click", () => {
 
 ipc.on("update-list", function () {
   document.querySelector("#spinner").style.display = "block";
-  loadData();
+  loadData(localStorage.getItem("endPoint"));
 });
 
 // ADD ITEM
@@ -36,8 +36,10 @@ addBtn.addEventListener("click", function () {
   let win = new BrowserWindow({
     width: 450,
     height: 330,
+    parent: remote.getCurrentWindow(),
     // center: true,
     frame: false,
+    resizable: false,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -47,7 +49,13 @@ addBtn.addEventListener("click", function () {
   });
   // win.webContents.openDevTools();
   win.loadURL(modalPath);
+  // win.once("ready-to-show", () => {
   win.show();
+  // });
+  localStorage.setItem(
+    "addTitle",
+    document.querySelector("#selected-route").textContent.trim()
+  );
 });
 
 menu.forEach((item) => {

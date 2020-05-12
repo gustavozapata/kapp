@@ -124,7 +124,7 @@ main header p {
 #spinner {
   width: 500px;
   text-align: center;
-  margin: 210px auto;
+  margin: 200px auto 0 auto;
 }
 #spinner img {
   width: 440px;

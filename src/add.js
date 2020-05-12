@@ -4,10 +4,13 @@ const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 
 const form = document.querySelector(".main-form form");
+const addTitle = document.querySelector("#add-category");
 const keys = document.querySelector(".keys");
 const addKeyword = document.querySelector(".add-keyword");
 const keywordInput = document.querySelector(".keywords input");
 const closeBtn = document.getElementById("close");
+
+addTitle.textContent = localStorage.getItem("addTitle").slice(0, -1);
 
 let keywords = [];
 
@@ -19,14 +22,21 @@ form.addEventListener("submit", async function (e) {
     .value;
   const city = document.querySelector("input[name='city']").value;
 
-  await axios.post("http://localhost:4000/api/v1/assets", {
+  let endPoint = localStorage.getItem("addTitle").toLowerCase();
+  const reqBody = {
     name,
     description,
     keywords,
     currentlyAt: {
       city,
     },
-  });
+  };
+
+  let num = endPoint.split(" ");
+  endPoint = num.length > 1 ? num[1] : endPoint;
+  localStorage.setItem("endPoint", endPoint);
+  await axios.post(`http://localhost:4000/api/v1/${endPoint}`, reqBody);
+
   ipc.send("update-list");
   const window = remote.getCurrentWindow();
   window.close();
