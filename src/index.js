@@ -2,7 +2,7 @@ const axios = require("axios");
 const path = require("path");
 const electron = require("electron");
 const { dialog } = require("electron").remote;
-const kaapServer = require("../Local");
+const kappServer = require("../Local");
 const BrowserWindow = electron.remote.BrowserWindow;
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
@@ -25,7 +25,7 @@ loadData("assets");
 
 async function loadData(endPoint) {
   await axios
-    .get(`http://${kaapServer}:4000/api/v1/${endPoint}`)
+    .get(`http://${kappServer}:4000/api/v1/${endPoint}`)
     .then((res) => {
       document.querySelector("#spinner").style.display = "none";
       let data = res.data.data;
@@ -109,7 +109,7 @@ function activeActions() {
           if (res.response === 0) {
             //0 = yes
             await axios
-              .delete(`http://${kaapServer}:4000/api/v1/${endPoint}/${id}`)
+              .delete(`http://${kappServer}:4000/api/v1/${endPoint}/${id}`)
               .then(() => {
                 loadData(endPoint);
               });
@@ -127,7 +127,7 @@ async function getSelectedItems(item) {
   let num = name.split(" ");
   name = num.length > 1 ? num[1] : name;
 
-  await axios.get(`http://${kaapServer}:4000/api/v1/${name}`).then((res) => {
+  await axios.get(`http://${kappServer}:4000/api/v1/${name}`).then((res) => {
     items.style.display = "block";
     document.querySelector("#spinner").style.display = "none";
     items.innerHTML = populate(res.data.data);

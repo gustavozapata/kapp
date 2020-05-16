@@ -1,6 +1,6 @@
 const axios = require("axios");
 const electron = require("electron");
-const kaapServer = require("../Local");
+const kappServer = require("../Local");
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 
@@ -36,7 +36,7 @@ form.addEventListener("submit", async function (e) {
   let num = endPoint.split(" ");
   endPoint = num.length > 1 ? num[1] : endPoint;
   localStorage.setItem("endPoint", endPoint);
-  await axios.post(`http://${kaapServer}:4000/api/v1/${endPoint}`, reqBody);
+  await axios.post(`http://${kappServer}:4000/api/v1/${endPoint}`, reqBody);
 
   ipc.send("update-list");
   const window = remote.getCurrentWindow();
