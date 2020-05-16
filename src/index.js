@@ -1,6 +1,8 @@
 const axios = require("axios");
 const path = require("path");
 const electron = require("electron");
+const { dialog } = require("electron").remote;
+const kaapServer = require("../Local");
 const BrowserWindow = electron.remote.BrowserWindow;
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
@@ -9,15 +11,29 @@ const power = document.querySelector("#power");
 const items = document.querySelector(".items");
 const menu = document.querySelectorAll("nav ul li");
 const addBtn = document.querySelector("#add");
+let removeItem = [];
+
+const removeOptions = {
+  type: "question",
+  buttons: ["Yes", "No"],
+  title: "Delete item",
+  message: "Do you want to delete this?",
+  detail: "This action can't be undone",
+};
 
 loadData("assets");
 
 async function loadData(endPoint) {
-  await axios.get(`http://localhost:4000/api/v1/${endPoint}`).then((res) => {
-    document.querySelector("#spinner").style.display = "none";
-    let data = res.data.data;
-    items.innerHTML = populate(data);
-  });
+  await axios
+    .get(`http://${kaapServer}:4000/api/v1/${endPoint}`)
+    .then((res) => {
+      document.querySelector("#spinner").style.display = "none";
+      let data = res.data.data;
+      items.innerHTML = populate(data);
+    })
+    .then(() => {
+      activeActions();
+    });
 }
 
 power.addEventListener("click", () => {
@@ -81,6 +97,28 @@ menu.forEach((item) => {
   });
 });
 
+function activeActions() {
+  removeItem = document.querySelectorAll(".bin-image");
+  removeItem.forEach((item) => {
+    item.addEventListener("click", () => {
+      let id = item.getAttribute("data-id");
+      let endPoint = localStorage.getItem("endPoint");
+      dialog
+        .showMessageBox(remote.getCurrentWindow(), removeOptions)
+        .then(async (res) => {
+          if (res.response === 0) {
+            //0 = yes
+            await axios
+              .delete(`http://${kaapServer}:4000/api/v1/${endPoint}/${id}`)
+              .then(() => {
+                loadData(endPoint);
+              });
+          }
+        });
+    });
+  });
+}
+
 async function getSelectedItems(item) {
   items.style.display = "none";
   document.querySelector("#spinner").style.display = "block";
@@ -89,10 +127,11 @@ async function getSelectedItems(item) {
   let num = name.split(" ");
   name = num.length > 1 ? num[1] : name;
 
-  await axios.get(`http://localhost:4000/api/v1/${name}`).then((res) => {
+  await axios.get(`http://${kaapServer}:4000/api/v1/${name}`).then((res) => {
     items.style.display = "block";
     document.querySelector("#spinner").style.display = "none";
     items.innerHTML = populate(res.data.data);
+    activeActions();
   });
 }
 
@@ -104,9 +143,11 @@ function populate(data) {
       2
     )}</p></div><div class="item-info"><p class="item-name">${
       el.name
-    }</p><img class="pen-image" src="../assets/images/pen.svg"/><img class="bin-image" src="../assets/images/bin.png"/><p>${
-      el.currentlyAt.city
-    }</p><span>${el.keywords[0]}</span></div></div>`;
+    }</p><img class="pen-image" src="../assets/images/pen.svg"/><img class="bin-image" data-id="${
+      el._id
+    }" src="../assets/images/bin.png"/><p>${el.currentlyAt.city}</p><span>${
+      el.keywords[0]
+    }</span></div></div>`;
   });
   return element;
 }
