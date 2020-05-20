@@ -45,10 +45,12 @@ form.addEventListener("submit", async function (e) {
 
 addKeyword.addEventListener("click", function (e) {
   e.preventDefault();
-  keywords.push(keywordInput.value);
-  keys.innerHTML = keys.innerHTML + addKey(keywordInput.value);
-  keywordInput.value = "";
-  getKeyContainers();
+  if (keywordInput.value !== "") {
+    keywords.push(keywordInput.value);
+    keys.innerHTML = keys.innerHTML + addKey(keywordInput.value);
+    keywordInput.value = "";
+    getKeyContainers();
+  }
 });
 
 function getKeyContainers() {

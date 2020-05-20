@@ -12,6 +12,7 @@ const items = document.querySelector(".items");
 const menu = document.querySelectorAll("nav ul li");
 const addBtn = document.querySelector("#add");
 let removeItem = [];
+let editItems = [];
 
 const removeOptions = {
   type: "question",
@@ -98,6 +99,46 @@ menu.forEach((item) => {
 });
 
 function activeActions() {
+  editItem();
+  deleteItem();
+}
+
+function editItem() {
+  editItems = document.querySelectorAll(".pen-image");
+  editItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      // let id = item.getAttribute("data-id");
+      // let endPoint = localStorage.getItem("endPoint");
+      renderEditModal();
+    });
+  });
+}
+
+function renderEditModal() {
+  const modalPath = path.join("file://", __dirname, "edit.html");
+  let win = new BrowserWindow({
+    width: 450,
+    height: 330,
+    parent: remote.getCurrentWindow(),
+    // center: true,
+    frame: false,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+  win.on("close", function () {
+    win = null;
+  });
+  // win.webContents.openDevTools();
+  win.loadURL(modalPath);
+  // win.once("ready-to-show", () => {
+  win.show();
+  // });
+  localStorage.setItem("editTitle", "Edit Item");
+}
+
+function deleteItem() {
   removeItem = document.querySelectorAll(".bin-image");
   removeItem.forEach((item) => {
     item.addEventListener("click", () => {
@@ -143,11 +184,21 @@ function populate(data) {
       2
     )}</p></div><div class="item-info"><p class="item-name">${
       el.name
-    }</p><img class="pen-image" src="../assets/images/pen.svg"/><img class="bin-image" data-id="${
+    }</p><img class="pen-image" data-id="${
       el._id
-    }" src="../assets/images/bin.png"/><p>${el.currentlyAt.city}</p><span>${
-      el.keywords[0]
-    }</span></div></div>`;
+    }" src="../assets/images/pen.svg"/><img class="bin-image" data-id="${
+      el._id
+    }" src="../assets/images/bin.png"/><p>${
+      el.currentlyAt.city
+    }</p>${getKeywords(el.keywords)}</div></div>`;
   });
   return element;
+}
+
+function getKeywords(keywords) {
+  let keys = "";
+  keywords.forEach((keyword) => {
+    keys += `<span>${keyword}</span>`;
+  });
+  return keys;
 }

@@ -168,10 +168,11 @@ main header p {
 }
 .item-info span {
   font-size: 0.6em;
-  font-weight: 500;
+  font-weight: 400;
   color: rgb(50, 200, 100);
   padding: 1px 3px;
   border-radius: 7px;
+  margin-right: 0px;
   border: 1px solid rgb(50, 200, 100);
 }
 .item-info .item-name {

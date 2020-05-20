@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Item</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/add.css" />
+  </head>
+  <body>
+    <h3>Edit <span id="add-category">Asset</span></h3>
+    <div class="main-form">
+      <form>
+        <input type="text" placeholder="Name" name="name" />
+        <textarea placeholder="Description" name="description"></textarea>
+        <input type="text" placeholder="Location" name="city" /><br />
+        <div class="keywords">
+          <input type="text" placeholder="Keywords" /><button
+            class="add-keyword"
+          >
+            +
+          </button>
+        </div>
+
+        <!-- dynamic populate -->
+        <div class="keys"></div>
+
+        <div class="buttons">
+          <button>Update</button>
+          <button id="close">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <script src="./edit.js"></script>
+  </body>
+</html>
