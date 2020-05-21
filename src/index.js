@@ -107,14 +107,13 @@ function editItem() {
   editItems = document.querySelectorAll(".pen-image");
   editItems.forEach((item) => {
     item.addEventListener("click", () => {
-      // let id = item.getAttribute("data-id");
-      // let endPoint = localStorage.getItem("endPoint");
-      renderEditModal();
+      let name = item.getAttribute("data-name");
+      renderEditModal(name);
     });
   });
 }
 
-function renderEditModal() {
+function renderEditModal(name) {
   const modalPath = path.join("file://", __dirname, "edit.html");
   let win = new BrowserWindow({
     width: 450,
@@ -135,7 +134,7 @@ function renderEditModal() {
   // win.once("ready-to-show", () => {
   win.show();
   // });
-  localStorage.setItem("editTitle", "Edit Item");
+  localStorage.setItem("editTitle", name);
 }
 
 function deleteItem() {
@@ -184,21 +183,28 @@ function populate(data) {
       2
     )}</p></div><div class="item-info"><p class="item-name">${
       el.name
-    }</p><img class="pen-image" data-id="${
+    }</p><img class="pen-image" data-name="${el.name}" data-id="${
       el._id
     }" src="../assets/images/pen.svg"/><img class="bin-image" data-id="${
       el._id
-    }" src="../assets/images/bin.png"/><p>${
-      el.currentlyAt.city
+    }" src="../assets/images/bin.png"/><p>${el.currentlyAt.city}${
+      el.expire
+        ? " | <span class='expire'>" + getExpireDate(el.expire) + "</span>"
+        : ""
     }</p>${getKeywords(el.keywords)}</div></div>`;
   });
   return element;
 }
 
+function getExpireDate(date) {
+  const formatDate = new Date(date);
+  return formatDate.toDateString();
+}
+
 function getKeywords(keywords) {
   let keys = "";
   keywords.forEach((keyword) => {
-    keys += `<span>${keyword}</span>`;
+    keys += `<span class="keywords-icons">${keyword}</span>`;
   });
   return keys;
 }
