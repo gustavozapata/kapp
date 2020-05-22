@@ -2,17 +2,48 @@
   "name": "kapp",
   "version": "1.0.0",
   "description": "list your assets, documents, and know where they are",
+  "author": "Gustavo Zapata https://gustavozapata.me contact@gustavozapata.me",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "nodemon --watch * --exec electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "install-app-deps",
+    "start": "npm install && electron .",
+    "pack": "build --dir",
+    "dist": "build",
+    "dev": "nodemon --watch * --exec electron ."
+  },
+  "build": {
+    "appId": "me.gustavozapata.kapp",
+    "category": "Personal, Productivity",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
   },
   "keywords": [],
-  "author": "https://gustavozapata.me",
   "license": "ISC",
   "devDependencies": {
     "electron": "^8.2.4",
+    "electron-builder": "^22.6.1",
     "nodemon": "^2.0.3"
   },
   "dependencies": {
