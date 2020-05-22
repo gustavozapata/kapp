@@ -8,12 +8,24 @@
     <link rel="stylesheet" href="../assets/css/add.css" />
   </head>
   <body>
-    <h3>Edit <span id="add-category">Item</span></h3>
+    <h3>Edit Item</h3>
     <div class="main-form">
       <form>
-        <input type="text" placeholder="Name" name="name" />
-        <textarea placeholder="Description" name="description"></textarea>
-        <input type="text" placeholder="Location" name="city" /><br />
+        <input type="text" placeholder="Name" name="name" id="name" />
+        <textarea
+          placeholder="Description"
+          name="description"
+          id="description"
+        ></textarea>
+        <input
+          type="text"
+          placeholder="Location"
+          name="city"
+          id="location"
+        /><br />
+        <div class="datepicker">
+          <span>Expire Date</span> <input type="date" id="date" />
+        </div>
         <div class="keywords">
           <input type="text" placeholder="Keywords" /><button
             class="add-keyword"

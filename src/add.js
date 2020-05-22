@@ -6,6 +6,7 @@ const ipc = electron.ipcRenderer;
 
 const form = document.querySelector(".main-form form");
 const addTitle = document.querySelector("#add-category");
+const dateInput = document.querySelector("#date");
 const keys = document.querySelector(".keys");
 const addKeyword = document.querySelector(".add-keyword");
 const keywordInput = document.querySelector(".keywords input");
@@ -23,7 +24,6 @@ form.addEventListener("submit", async function (e) {
     .value;
   const city = document.querySelector("input[name='city']").value;
 
-  let endPoint = localStorage.getItem("addTitle").toLowerCase();
   const reqBody = {
     name,
     description,
@@ -31,11 +31,10 @@ form.addEventListener("submit", async function (e) {
     currentlyAt: {
       city,
     },
+    expire: dateInput.value,
   };
 
-  let num = endPoint.split(" ");
-  endPoint = num.length > 1 ? num[1] : endPoint;
-  localStorage.setItem("endPoint", endPoint);
+  let endPoint = localStorage.getItem("endPoint");
   await axios.post(`http://${kappServer}:4000/api/v1/${endPoint}`, reqBody);
 
   ipc.send("update-list");
@@ -57,6 +56,8 @@ function getKeyContainers() {
   const deleteKeyword = document.querySelectorAll(".keyword-container");
   deleteKeyword.forEach((key) => {
     key.querySelector(".delete").addEventListener("click", function () {
+      let element = key.querySelector(".keyword").textContent;
+      keywords = keywords.filter((e) => e !== element);
       key.style.display = "none";
     });
   });

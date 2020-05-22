@@ -48,6 +48,19 @@ textarea {
   outline: none;
   width: 150px;
 }
+.datepicker {
+  text-align: center;
+}
+.datepicker span {
+  vertical-align: middle;
+  font-size: 0.8em;
+  font-weight: 500;
+  line-height: 4;
+  margin-right: 10px;
+}
+.datepicker input {
+  width: 140px;
+}
 .keywords {
   /* clear: both; */
   text-align: center;

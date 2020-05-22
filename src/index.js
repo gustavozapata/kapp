@@ -52,7 +52,7 @@ addBtn.addEventListener("click", function () {
   const modalPath = path.join("file://", __dirname, "add.html");
   let win = new BrowserWindow({
     width: 450,
-    height: 330,
+    height: 382,
     parent: remote.getCurrentWindow(),
     // center: true,
     frame: false,
@@ -107,17 +107,17 @@ function editItem() {
   editItems = document.querySelectorAll(".pen-image");
   editItems.forEach((item) => {
     item.addEventListener("click", () => {
-      let name = item.getAttribute("data-name");
-      renderEditModal(name);
+      let id = item.getAttribute("data-id");
+      renderEditModal(id);
     });
   });
 }
 
-function renderEditModal(name) {
+function renderEditModal(id) {
   const modalPath = path.join("file://", __dirname, "edit.html");
   let win = new BrowserWindow({
     width: 450,
-    height: 330,
+    height: 382,
     parent: remote.getCurrentWindow(),
     // center: true,
     frame: false,
@@ -131,10 +131,8 @@ function renderEditModal(name) {
   });
   // win.webContents.openDevTools();
   win.loadURL(modalPath);
-  // win.once("ready-to-show", () => {
   win.show();
-  // });
-  localStorage.setItem("editTitle", name);
+  localStorage.setItem("itemId", id);
 }
 
 function deleteItem() {
@@ -166,6 +164,7 @@ async function getSelectedItems(item) {
   let name = item.toLowerCase().trim();
   let num = name.split(" ");
   name = num.length > 1 ? num[1] : name;
+  localStorage.setItem("endPoint", name);
 
   await axios.get(`http://${kappServer}:4000/api/v1/${name}`).then((res) => {
     items.style.display = "block";
@@ -183,7 +182,7 @@ function populate(data) {
       2
     )}</p></div><div class="item-info"><p class="item-name">${
       el.name
-    }</p><img class="pen-image" data-name="${el.name}" data-id="${
+    }</p><img class="pen-image" data-id="${
       el._id
     }" src="../assets/images/pen.svg"/><img class="bin-image" data-id="${
       el._id
