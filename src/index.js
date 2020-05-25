@@ -23,6 +23,7 @@ const removeOptions = {
 };
 
 loadData("assets");
+localStorage.setItem("endPoint", "assets");
 
 async function loadData(endPoint) {
   await axios

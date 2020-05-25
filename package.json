@@ -8,6 +8,7 @@
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "npm install && electron .",
+    "startlocal": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "dev": "nodemon --watch * --exec electron ."
